@@ -61,7 +61,7 @@ function Footer() {
 
           <div className="footer-contact">
 
-            <a href="tel:+923001234567">
+            <a href="tel:+923131555111">
               <i className="bi bi-telephone-fill"></i>
               <span>+92 313 1555 111</span>
             </a>
@@ -98,7 +98,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/deltagun.pk?igsh=NjQxeDkzMTBiOWYz"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
@@ -107,7 +107,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://www.youtube.com/"
+              href="https://youtube.com/@deltagun-07?si=I0RiqKZ7CpPPG7wT"
               target="_blank"
               rel="noreferrer"
               aria-label="YouTube"
@@ -116,7 +116,7 @@ function Footer() {
             </a>
 
             <a
-              href="https://wa.me/923001234567"
+              href="https://whatsapp.com/channel/0029Vb7ipGg6LwHdZVzvTj3i"
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
