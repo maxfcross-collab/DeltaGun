@@ -1,10 +1,20 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  const isActive = (path) => {
+    if (path === "/") {
+      return location.pathname === "/";
+    }
+
+    return location.pathname.startsWith(path);
   };
 
   return (
@@ -12,7 +22,7 @@ function Header() {
       <div className="header-container">
 
         {/* Brand */}
-        <a href="#home" className="brand" onClick={closeMenu}>
+        <Link to="/" className="brand" onClick={closeMenu}>
           <img
             src="/logo.png"
             alt="Delta Gun Logo"
@@ -22,40 +32,68 @@ function Header() {
           <span className="brand-name">
             DELTA GUN
           </span>
-        </a>
+        </Link>
 
         {/* Navigation */}
         <nav
           className={`main-nav ${menuOpen ? "open" : ""}`}
           aria-label="Main navigation"
         >
-          <a href="#home" onClick={closeMenu}>
+
+          {/* Home */}
+          <Link
+            to="/"
+            className={isActive("/") ? "active" : ""}
+            onClick={closeMenu}
+          >
             <i className="bi bi-house-door"></i>
             <span>Home</span>
-          </a>
+          </Link>
 
-          <a href="#products" onClick={closeMenu}>
+          {/* Shop All */}
+          <Link
+            to="/products"
+            className={isActive("/products") ? "active" : ""}
+            onClick={closeMenu}
+          >
             <i className="bi bi-grid"></i>
             <span>Shop All</span>
-          </a>
+          </Link>
 
-          <a href="#about" onClick={closeMenu}>
+          {/* About */}
+          <Link
+            to="/about"
+            className={isActive("/about") ? "active" : ""}
+            onClick={closeMenu}
+          >
             <i className="bi bi-info-circle"></i>
             <span>About</span>
-          </a>
+          </Link>
 
-          <a href="#contact" onClick={closeMenu}>
+          {/* Contact */}
+          <Link
+            to="/contact"
+            className={isActive("/contact") ? "active" : ""}
+            onClick={closeMenu}
+          >
             <i className="bi bi-envelope"></i>
             <span>Contact</span>
-          </a>
+          </Link>
+
         </nav>
 
         {/* Contact Button */}
         <div className="header-action">
-          <a href="#contact" className="header-contact">
+          <Link
+            to="/contact"
+            className={`header-contact ${
+              isActive("/contact") ? "active" : ""
+            }`}
+            onClick={closeMenu}
+          >
             <i className="bi bi-chat-dots"></i>
             <span>Contact Us</span>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu */}
@@ -63,11 +101,19 @@ function Header() {
           type="button"
           className="mobile-menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-label={
+            menuOpen
+              ? "Close navigation"
+              : "Open navigation"
+          }
           aria-expanded={menuOpen}
         >
           <i
-            className={menuOpen ? "bi bi-x-lg" : "bi bi-list"}
+            className={
+              menuOpen
+                ? "bi bi-x-lg"
+                : "bi bi-list"
+            }
           ></i>
         </button>
 
