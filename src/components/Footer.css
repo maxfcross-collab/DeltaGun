@@ -1,0 +1,214 @@
+/* =========================================================
+   DELTA GUN - LIGHT FOOTER
+========================================================= */
+
+.dg-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+}
+
+.dg-footer-inner {
+  width: min(1280px, 92%);
+  margin: 0 auto;
+  padding: 70px 0 50px;
+
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 1.1fr 0.9fr;
+  gap: 50px;
+}
+
+.dg-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.dg-footer-logo-box {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.dg-footer-logo-box img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.dg-footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dg-footer-logo-text strong {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.dg-footer-logo-text small {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+
+.dg-footer-brand p {
+  max-width: 400px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.dg-footer-brand .dg-footer-note {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.dg-footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.dg-footer-col h4 {
+  margin-bottom: 6px;
+
+  color: var(--dark);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dg-footer-col > a {
+  color: var(--text);
+  font-size: 15px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.dg-footer-col > a:hover {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+.dg-footer-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dg-footer-contact i {
+  margin-top: 3px;
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.dg-footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dg-footer-social a {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--primary);
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 18px;
+
+  transition: all 0.25s ease;
+}
+
+.dg-footer-social a:hover {
+  color: #ffffff;
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.dg-footer-bottom {
+  width: min(1280px, 92%);
+  margin: 0 auto;
+  padding: 22px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid var(--border);
+}
+
+.dg-footer-bottom p {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.dg-footer-bottom button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--primary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dg-footer-bottom button:hover {
+  color: var(--primary-dark);
+}
+
+@media (max-width: 960px) {
+  .dg-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .dg-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .dg-footer-inner {
+    grid-template-columns: 1fr;
+    padding: 55px 0 35px;
+  }
+
+  .dg-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

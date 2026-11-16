@@ -1,11 +1,7 @@
 import Products from "../components/Products";
 
 function ProductsPage() {
-  return (
-    <main>
-      <Products />
-    </main>
-  );
+  return <Products />;
 }
 
 export default ProductsPage;

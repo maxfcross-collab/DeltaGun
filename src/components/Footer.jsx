@@ -1,93 +1,68 @@
+import { Link } from "react-router-dom";
+import "./Footer.css";
+
 function Footer() {
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
-    <footer className="site-footer">
-
-      <div className="footer-container">
-
+    <footer className="dg-footer">
+      <div className="dg-footer-inner">
         {/* Brand */}
-        <div className="footer-brand">
-
-          <a href="#home" className="footer-logo">
-            <img
-              src="/logo.png"
-              alt="Delta Gun Logo"
-            />
-
-            <span>DELTA GUN</span>
-          </a>
+        <div className="dg-footer-brand">
+          <Link to="/" className="dg-footer-logo">
+            <span className="dg-footer-logo-box">
+              <img src="/logo.png" alt="Delta Gun Logo" />
+            </span>
+            <span className="dg-footer-logo-text">
+              <strong>DELTA GUN</strong>
+              <small>PRECISION SHOWROOM</small>
+            </span>
+          </Link>
 
           <p>
-            Quality. Precision. Performance.
+            Professional presentation of quality firearms and tactical
+            equipment for enthusiasts.
           </p>
 
-          <p className="footer-description">
-            Professional presentation of quality firearms
-            and tactical equipment for enthusiasts.
+          <p className="dg-footer-note">
+            * Strictly compliant with valid arms license regulations.
           </p>
-
         </div>
 
-
-        {/* Quick Links */}
-        <div className="footer-column">
-
-          <h4>Quick Links</h4>
-
-          <div className="footer-links">
-            <a href="#home">
-              Home
-            </a>
-
-            <a href="#products">
-              Collection
-            </a>
-
-            <a href="#about">
-              About
-            </a>
-
-            <a href="#contact">
-              Contact
-            </a>
-          </div>
-
+        {/* Navigation */}
+        <div className="dg-footer-col">
+          <h4>Navigation</h4>
+          <Link to="/">Home</Link>
+          <Link to="/products">Shop All</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
         </div>
-
 
         {/* Contact */}
-        <div className="footer-column">
+        <div className="dg-footer-col">
+          <h4>Showroom Desk</h4>
 
-          <h4>Contact</h4>
+          <a href="tel:+923131555111" className="dg-footer-contact">
+            <i className="bi bi-telephone-fill"></i>
+            <span>+92 313 1555 111</span>
+          </a>
 
-          <div className="footer-contact">
+          <a href="mailto:deltagun@gmail.com" className="dg-footer-contact">
+            <i className="bi bi-envelope-fill"></i>
+            <span>deltagun@gmail.com</span>
+          </a>
 
-            <a href="tel:+923131555111">
-              <i className="bi bi-telephone-fill"></i>
-              <span>+92 313 1555 111</span>
-            </a>
-
-            <a href="mailto:info@deltagun.com">
-              <i className="bi bi-envelope-fill"></i>
-              <span>deltagun@gmail.com</span>
-            </a>
-
-            <a href="#contact">
-              <i className="bi bi-geo-alt-fill"></i>
-              <span>Visit Our Shop</span>
-            </a>
-
-          </div>
-
+          <Link to="/contact" className="dg-footer-contact">
+            <i className="bi bi-geo-alt-fill"></i>
+            <span>Visit Our Shop, Karachi</span>
+          </Link>
         </div>
 
-
-        {/* Social Media */}
-        <div className="footer-column">
-
+        {/* Social */}
+        <div className="dg-footer-col">
           <h4>Follow Us</h4>
 
-          <div className="footer-social">
-
+          <div className="dg-footer-social">
             <a
               href="https://www.facebook.com/"
               target="_blank"
@@ -123,33 +98,20 @@ function Footer() {
             >
               <i className="bi bi-whatsapp"></i>
             </a>
-
           </div>
-
         </div>
-
       </div>
 
+      <div className="dg-footer-bottom">
+        <p>© {new Date().getFullYear()} Delta Gun. All rights reserved. Karachi, Pakistan.</p>
 
-      {/* Footer Bottom */}
-      <div className="footer-bottom">
-
-        <p>
-          © {new Date().getFullYear()} Delta Gun. All rights reserved.
-        </p>
-
-        <a href="#home">
-          Back to top
+        <button type="button" onClick={scrollTop}>
+          Back to Top
           <i className="bi bi-arrow-up"></i>
-        </a>
-
+        </button>
       </div>
-
     </footer>
   );
 }
 
 export default Footer;
-
-
-

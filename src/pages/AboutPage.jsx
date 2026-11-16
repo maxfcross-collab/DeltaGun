@@ -1,11 +1,7 @@
 import About from "../components/About";
 
 function AboutPage() {
-  return (
-    <main>
-      <About />
-    </main>
-  );
+  return <About />;
 }
 
 export default AboutPage;

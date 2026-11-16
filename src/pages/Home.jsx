@@ -1,200 +1,142 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { defaultSiteContent } from "../lib/siteContent";
 import Hero from "../components/Hero";
 import Products from "../components/Products";
+import "./Home.css";
 
 function Home() {
+  const [content, setContent] = useState(defaultSiteContent.home);
+
+  useEffect(() => {
+    const fetchHomeContent = async () => {
+      const { data, error } = await supabase
+        .from("site_content")
+        .select("content")
+        .eq("content_key", "home")
+        .eq("is_published", true)
+        .maybeSingle();
+
+      if (!error && data?.content) {
+        setContent((previous) => ({
+          ...previous,
+          ...data.content,
+        }));
+      }
+    };
+
+    fetchHomeContent();
+  }, []);
+
+  const featureCards = Array.isArray(content.featureCards)
+    ? content.featureCards
+    : defaultSiteContent.home.featureCards;
+
   return (
     <>
-      {/* =========================
-          HERO SECTION
-      ========================= */}
+      {/* HERO SECTION */}
       <Hero />
 
-      {/* =========================
-          PRODUCTS / COLLECTIONS
-      ========================= */}
+      {/* PRODUCTS / COLLECTIONS */}
       <Products />
 
-      {/* =========================
-          WHY DELTA GUN
-      ========================= */}
-      <section className="home-features-section">
-        <div className="home-container">
-
-          <div className="home-section-heading">
-            <span>WHY DELTA GUN</span>
-
-            <h2>Built Around Quality & Precision</h2>
-
-            <p>
-              Discover a carefully presented collection with a focus on
-              quality, precision, performance and professional presentation.
-            </p>
+      {/* WHY DELTA GUN */}
+      <section className="hm-why">
+        <div className="hm-container">
+          <div className="hm-why-head">
+            <span className="hm-eyebrow">{content.featuresLabel}</span>
+            <h2>{content.featuresTitle}</h2>
+            <p>{content.featuresDescription}</p>
           </div>
 
-          <div className="home-features-grid">
+          <div className="hm-why-grid">
+            {featureCards.map((card, index) => (
+              <div className="hm-why-card" key={card.id || index}>
+                <div className="hm-why-top">
+                  <span className="hm-why-num">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <i className={`bi bi-${card.icon || "star"}`}></i>
+                </div>
 
-            {/* Feature 1 */}
-            <div className="home-feature-card">
-              <div className="home-feature-icon">
-                <i className="bi bi-award-fill"></i>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
               </div>
-
-              <h3>Quality Focused</h3>
-
-              <p>
-                We present our collection with attention to quality,
-                craftsmanship and professional standards.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="home-feature-card">
-              <div className="home-feature-icon">
-                <i className="bi bi-crosshair2"></i>
-              </div>
-
-              <h3>Precision</h3>
-
-              <p>
-                Explore a collection presented around precision, detail
-                and dependable performance.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="home-feature-card">
-              <div className="home-feature-icon">
-                <i className="bi bi-shield-check"></i>
-              </div>
-
-              <h3>Professional</h3>
-
-              <p>
-                Every collection is presented with a clean, modern and
-                professional approach.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="home-feature-card">
-              <div className="home-feature-icon">
-                <i className="bi bi-stars"></i>
-              </div>
-
-              <h3>Premium Experience</h3>
-
-              <p>
-                A refined browsing experience designed for enthusiasts
-                who value quality and attention to detail.
-              </p>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
 
-      {/* =========================
-          BRAND INTRODUCTION
-      ========================= */}
-      <section className="home-brand-section">
-        <div className="home-container">
+      {/* BRAND INTRODUCTION */}
+      <section className="hm-brand">
+        <div className="hm-container hm-brand-grid">
+          <div className="hm-brand-content">
+            <span className="hm-eyebrow">DELTA GUN</span>
 
-          <div className="home-brand-content">
+            <h2>{content.brandTitle}</h2>
+            <p>{content.brandDescription}</p>
 
-            <div className="home-brand-label">
-              DELTA GUN
-            </div>
-
-            <h2>
-              Quality. Precision.
-              <br />
-              Performance.
-            </h2>
-
-            <p>
-              Delta Gun brings together carefully presented collections
-              focused on quality, design and professional presentation.
-              Explore our collections and discover more about what we offer.
-            </p>
-
-            <div className="home-brand-actions">
-              <Link to="/products" className="home-btn-primary">
+            <div className="hm-brand-actions">
+              <Link to="/products" className="hm-btn hm-btn-primary">
                 Explore Collection
                 <i className="bi bi-arrow-right"></i>
               </Link>
 
-              <Link to="/about" className="home-btn-outline">
+              <Link to="/about" className="hm-btn hm-btn-outline">
                 About Delta Gun
-                <i className="bi bi-arrow-right"></i>
               </Link>
             </div>
-
           </div>
 
-          <div className="home-brand-highlight">
-
-            <div className="brand-highlight-item">
+          <div className="hm-brand-list">
+            <div className="hm-brand-item">
               <i className="bi bi-check-circle-fill"></i>
-
               <div>
                 <strong>Quality Focused</strong>
                 <span>Carefully presented collections</span>
               </div>
             </div>
 
-            <div className="brand-highlight-item">
+            <div className="hm-brand-item">
               <i className="bi bi-check-circle-fill"></i>
-
               <div>
                 <strong>Professional Presentation</strong>
                 <span>Clean and modern experience</span>
               </div>
             </div>
 
-            <div className="brand-highlight-item">
+            <div className="hm-brand-item">
               <i className="bi bi-check-circle-fill"></i>
-
               <div>
                 <strong>Customer Support</strong>
                 <span>We're here to help with inquiries</span>
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
 
-      {/* =========================
-          CTA SECTION
-      ========================= */}
-      <section className="home-cta-section">
-        <div className="home-cta-content">
+      {/* CTA SECTION */}
+      <section className="hm-cta-section">
+        <div className="hm-container">
+          <div className="hm-cta">
+            <span className="hm-cta-label">{content.ctaLabel}</span>
+            <h2>{content.ctaTitle}</h2>
+            <p>{content.ctaDescription}</p>
 
-          <span>EXPLORE DELTA GUN</span>
+            <div className="hm-cta-buttons">
+              <Link to="/products" className="hm-cta-primary">
+                Shop All
+                <i className="bi bi-arrow-right"></i>
+              </Link>
 
-          <h2>Looking For More Information?</h2>
-
-          <p>
-            Explore our collections or get in touch with our team
-            for more information and general inquiries.
-          </p>
-
-          <div className="home-cta-buttons">
-
-            <Link to="/products" className="home-cta-primary">
-              Shop All
-              <i className="bi bi-arrow-right"></i>
-            </Link>
-
-            <Link to="/contact" className="home-cta-secondary">
-              Contact Us
-              <i className="bi bi-chat-dots"></i>
-            </Link>
-
+              <Link to="/contact" className="hm-cta-secondary">
+                <i className="bi bi-chat-dots"></i>
+                Contact Us
+              </Link>
+            </div>
           </div>
-
         </div>
       </section>
     </>

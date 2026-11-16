@@ -1,0 +1,371 @@
+/* =========================================================
+   DELTA GUN - ROYAL BLUE LIGHT HEADER
+========================================================= */
+
+/* ---------- TOP BAR ---------- */
+
+.dg-topbar {
+  background: var(--primary);
+  color: #c9d0ff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.dg-topbar-inner {
+  width: min(1280px, 92%);
+  min-height: 38px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dg-topbar-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #ffffff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dg-topbar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7dd3fc;
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.25);
+}
+
+.dg-topbar-center {
+  flex: 1;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dg-topbar-phone {
+  color: #ffffff;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.dg-topbar-phone:hover {
+  opacity: 0.8;
+}
+
+/* ---------- HEADER ---------- */
+
+.dg-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.dg-header-inner {
+  width: min(1280px, 92%);
+  min-height: 80px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ---------- BRAND ---------- */
+
+.dg-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.dg-brand-logo {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  transition: transform 0.3s ease;
+}
+
+.dg-brand-logo img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.dg-brand:hover .dg-brand-logo {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.dg-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dg-brand-name {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.dg-brand-tagline {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+
+/* ---------- NAV ---------- */
+
+.dg-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.dg-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 11px 16px;
+
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dg-nav a i {
+  font-size: 14px;
+}
+
+.dg-nav a:hover {
+  color: var(--primary);
+  background: var(--light);
+}
+
+.dg-nav a.active {
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-color: rgba(30, 33, 144, 0.14);
+}
+
+/* ---------- CTA ---------- */
+
+.dg-header-action {
+  flex-shrink: 0;
+}
+
+.dg-header-cta {
+  min-height: 48px;
+  padding: 0 24px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #ffffff;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  box-shadow: 0 10px 24px rgba(30, 33, 144, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dg-header-cta:hover {
+  color: #ffffff;
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(30, 33, 144, 0.3);
+}
+
+/* ---------- MOBILE BUTTON ---------- */
+
+.dg-menu-btn {
+  display: none;
+
+  width: 46px;
+  height: 46px;
+  margin-left: auto;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  transition: background 0.25s ease;
+}
+
+.dg-menu-btn:hover {
+  background: #e2e6fa;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .dg-topbar-center {
+    display: none;
+  }
+
+  .dg-topbar-inner {
+    justify-content: space-between;
+  }
+
+  .dg-nav a {
+    padding: 10px 11px;
+    font-size: 11px;
+  }
+
+  .dg-header-cta {
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .dg-header-inner {
+    min-height: 72px;
+    position: relative;
+  }
+
+  .dg-header-action {
+    display: none;
+  }
+
+  .dg-menu-btn {
+    display: inline-flex;
+  }
+
+  .dg-nav {
+    position: absolute;
+    top: 100%;
+    left: -4%;
+    right: -4%;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+
+    margin-left: 0;
+    padding: 14px 4% 18px;
+
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(30, 33, 144, 0.12);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s ease;
+  }
+
+  .dg-nav.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .dg-nav a {
+    min-height: 50px;
+    padding: 13px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .dg-topbar {
+    font-size: 10px;
+  }
+
+  .dg-topbar-live {
+    letter-spacing: 0.04em;
+  }
+
+  .dg-brand-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dg-brand-logo img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .dg-brand-name {
+    font-size: 19px;
+  }
+
+  .dg-brand-tagline {
+    font-size: 7.5px;
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (max-width: 380px) {
+  .dg-brand-tagline {
+    display: none;
+  }
+}

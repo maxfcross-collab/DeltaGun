@@ -1,0 +1,586 @@
+/* =========================================================
+   DELTA GUN - ROYAL BLUE LIGHT HERO
+========================================================= */
+
+.dg-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  padding: 90px 0 80px;
+
+  background:
+    linear-gradient(rgba(30, 33, 144, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 33, 144, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, #ffffff 0%, var(--light) 100%);
+
+  background-size: 56px 56px, 56px 56px, 100% 100%;
+}
+
+.dg-hero-inner,
+.dg-hero-stats {
+  width: min(1280px, 92%);
+  margin: 0 auto;
+}
+
+.dg-hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 60px;
+}
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.dg-hero-copy {
+  max-width: 680px;
+}
+
+.dg-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 28px;
+  padding: 9px 16px;
+
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid rgba(30, 33, 144, 0.16);
+  border-radius: 999px;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dg-hero-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px rgba(30, 33, 144, 0.15);
+}
+
+.dg-hero-copy h1 {
+  margin: 0 0 26px;
+
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(38px, 5.6vw, 76px);
+  line-height: 1.03;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+
+  overflow-wrap: anywhere;
+}
+
+.dg-title-dark,
+.dg-title-blue {
+  display: block;
+}
+
+.dg-title-dark {
+  color: var(--dark);
+}
+
+.dg-title-blue {
+  color: var(--primary);
+}
+
+.dg-hero-description {
+  max-width: 560px;
+  margin: 0 0 36px;
+
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* Buttons */
+
+.dg-hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.dg-hero-btn {
+  min-height: 58px;
+  padding: 0 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  border-radius: 14px;
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dg-hero-btn i {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+}
+
+.dg-hero-btn-primary {
+  color: #ffffff;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  box-shadow: 0 14px 30px rgba(30, 33, 144, 0.25);
+}
+
+.dg-hero-btn-primary:hover {
+  color: #ffffff;
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(30, 33, 144, 0.32);
+}
+
+.dg-hero-btn-primary:hover i {
+  transform: translateX(4px);
+}
+
+.dg-hero-btn-secondary {
+  color: var(--primary);
+  background: #ffffff;
+  border: 1px solid #d3d9f0;
+}
+
+.dg-hero-btn-secondary:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   RIGHT VISUAL
+========================================================= */
+
+.dg-hero-visual {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.dg-visual-frame {
+  padding: 22px;
+
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+
+  box-shadow: 0 30px 70px rgba(30, 33, 144, 0.1);
+}
+
+.dg-visual-topbar,
+.dg-visual-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.dg-visual-topbar {
+  padding-bottom: 16px;
+  color: var(--dark);
+}
+
+.dg-visual-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.dg-visual-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.dg-visual-index {
+  color: var(--muted);
+}
+
+.dg-visual-footer {
+  padding-top: 16px;
+  color: var(--primary);
+}
+
+.dg-visual-footer i {
+  font-size: 16px;
+}
+
+/* Dot-grid canvas */
+
+.dg-visual-main {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #eaeefb;
+  background-image: radial-gradient(#b9c2e6 1px, transparent 1px);
+  background-size: 22px 22px;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.dg-ring {
+  position: absolute;
+  border: 1px solid rgba(30, 33, 144, 0.2);
+  border-radius: 50%;
+}
+
+.dg-ring-one {
+  width: 250px;
+  height: 250px;
+  animation: dg-ring-pulse 6s ease-in-out infinite;
+}
+
+.dg-ring-two {
+  width: 320px;
+  height: 320px;
+  border-style: dashed;
+  opacity: 0.6;
+  animation: dg-ring-spin 40s linear infinite;
+}
+
+/* Ripple circles moving outward (behind the text) */
+.dg-visual-main::before,
+.dg-visual-main::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  margin: -125px 0 0 -125px;
+
+  border: 1.5px solid rgba(30, 33, 144, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+
+  opacity: 0;
+  animation: dg-ripple 8s ease-out infinite;
+}
+
+.dg-visual-main::after {
+  animation-delay: 4s;
+}
+
+@keyframes dg-ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes dg-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dg-ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-ring-one,
+  .dg-ring-two,
+  .dg-visual-main::before,
+  .dg-visual-main::after {
+    animation: none;
+  }
+}
+
+.dg-visual-center {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dg-center-small,
+.dg-center-subtitle,
+.dg-center-caption {
+  font-family: var(--font-mono);
+  color: var(--primary);
+}
+
+.dg-center-small {
+  font-size: 11px;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+}
+
+.dg-center-title {
+  margin-top: 6px;
+
+  color: var(--dark);
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5vw, 66px);
+  line-height: 1;
+}
+
+.dg-center-subtitle {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+}
+
+.dg-center-line {
+  width: 54px;
+  height: 3px;
+  margin: 20px 0 14px;
+  border-radius: 10px;
+  background: var(--primary);
+}
+
+.dg-center-caption {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+/* Floating chips */
+
+.dg-floating {
+  position: absolute;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 11px 14px;
+
+  color: var(--dark);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(30, 33, 144, 0.12);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+}
+
+.dg-floating i {
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.dg-floating strong {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.dg-floating-top {
+  top: 22px;
+  right: 14px;
+}
+
+.dg-floating-bottom {
+  bottom: 22px;
+  left: 14px;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.dg-hero-stats {
+  margin-top: 64px;
+  padding-top: 40px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  border-top: 1px solid var(--border);
+}
+
+.dg-stat-card {
+  padding: 24px 26px;
+
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(30, 33, 144, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dg-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(30, 33, 144, 0.1);
+}
+
+.dg-stat-card strong {
+  display: block;
+
+  color: var(--dark);
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.dg-stat-card:nth-child(3) strong {
+  color: var(--primary);
+}
+
+.dg-stat-card span {
+  display: block;
+  margin-top: 6px;
+
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 960px) {
+  .dg-hero {
+    padding: 70px 0 65px;
+  }
+
+  .dg-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .dg-hero-copy {
+    max-width: 100%;
+  }
+
+  .dg-hero-visual {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dg-hero {
+    padding: 55px 0 55px;
+  }
+
+  .dg-hero-description {
+    font-size: 15px;
+  }
+
+  .dg-hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dg-hero-btn {
+    width: 100%;
+  }
+
+  .dg-visual-frame {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .dg-visual-main {
+    min-height: 290px;
+  }
+
+  .dg-ring-one {
+    width: 210px;
+    height: 210px;
+  }
+
+  .dg-ring-two {
+    width: 270px;
+    height: 270px;
+  }
+    .dg-visual-main::before,
+  .dg-visual-main::after {
+    width: 210px;
+    height: 210px;
+    margin: -105px 0 0 -105px;
+  }
+
+  .dg-hero-stats {
+    grid-template-columns: 1fr;
+    margin-top: 45px;
+    padding-top: 30px;
+    gap: 14px;
+  }
+
+  .dg-stat-card {
+    padding: 20px 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dg-floating {
+    padding: 9px 10px;
+  }
+
+  .dg-floating-top {
+    right: 8px;
+  }
+
+  .dg-floating-bottom {
+    left: 8px;
+  }
+}
