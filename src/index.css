@@ -1,20 +1,30 @@
 /* =========================================
    DELTA GUN - GLOBAL STYLES
+   (Fonts are loaded in index.html)
 ========================================= */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-
 :root {
-  --primary: #3038b8;
-  --primary-dark: #252b91;
-  --accent: #5d68d8;
-  --dark: #11152b;
-  --text: #454b63;
-  --muted: #777d91;
-  --light: #f7f8fc;
+  /* Brand */
+  --primary: #1e2190;
+  --primary-dark: #151870;
+  --primary-soft: #eef0fb;
+  --accent: #4a52d6;
+
+  /* Neutrals */
+  --dark: #0b1120;
+  --text: #334155;
+  --muted: #64748b;
+  --light: #f3f6fc;
   --white: #ffffff;
-  --border: #e7e9f1;
-  --shadow: 0 12px 35px rgba(26, 32, 75, 0.08);
+  --border: #e2e8f5;
+
+  /* Effects */
+  --shadow: 0 12px 35px rgba(30, 33, 144, 0.08);
+
+  /* Fonts */
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
 * {
@@ -28,7 +38,7 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   background: var(--white);
   color: var(--text);
   line-height: 1.6;
@@ -37,8 +47,9 @@ body {
 body,
 button,
 input,
-textarea {
-  font-family: "Inter", sans-serif;
+textarea,
+select {
+  font-family: var(--font-body);
 }
 
 a {

@@ -1,0 +1,487 @@
+/* =========================================================
+   DELTA GUN - ADMIN LAYOUT (ROYAL BLUE LIGHT)
+========================================================= */
+
+.adm-shell {
+  min-height: 100vh;
+  background: var(--light);
+}
+
+/* ---------- Sidebar ---------- */
+
+.adm-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1100;
+
+  width: 270px;
+  padding: 26px 18px 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+  border-right: 1px solid var(--border);
+}
+
+.adm-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+  padding: 0 6px;
+}
+
+.adm-brand-logo {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+.adm-brand-logo img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.adm-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adm-brand-text strong {
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.adm-brand-text small {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+}
+
+.adm-nav-label {
+  margin: 0 8px 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.adm-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adm-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 14px;
+
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.adm-nav a i {
+  font-size: 17px;
+}
+
+.adm-nav a:hover {
+  color: var(--primary);
+  background: var(--light);
+}
+
+.adm-nav a.active {
+  color: #ffffff;
+  background: var(--primary);
+  box-shadow: 0 10px 22px rgba(30, 33, 144, 0.22);
+}
+
+.adm-side-bottom {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adm-user {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  margin-bottom: 6px;
+  padding: 12px;
+
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.adm-user-avatar {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 11px;
+
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+
+.adm-user-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-user-text small {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+.adm-user-text strong {
+  overflow: hidden;
+  color: var(--dark);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adm-side-link,
+.adm-logout {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 12px;
+
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.adm-side-link {
+  color: var(--primary);
+  background: #ffffff;
+  border: 1px solid #d3d9f0;
+}
+
+.adm-side-link:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.adm-logout {
+  color: #b91c1c;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+}
+
+.adm-logout:hover:not(:disabled) {
+  color: #ffffff;
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.adm-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Main ---------- */
+
+.adm-main {
+  min-height: 100vh;
+  margin-left: 270px;
+}
+
+.adm-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+
+  min-height: 64px;
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  background: var(--primary);
+}
+
+.adm-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.adm-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7dd3fc;
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.25);
+}
+
+.adm-top-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  transition: opacity 0.2s ease;
+}
+
+.adm-top-link:hover {
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.adm-menu-btn {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 11px;
+
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.adm-content {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 40px 32px 70px;
+}
+
+.adm-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.adm-eyebrow {
+  display: block;
+  margin-bottom: 12px;
+
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.adm-page-head h1 {
+  margin-bottom: 8px;
+
+  color: var(--dark);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.adm-page-head p {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.adm-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.adm-alert {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 14px;
+
+  font-size: 14px;
+}
+
+.adm-overlay {
+  display: none;
+}
+
+/* ---------- Verify screen (ProtectedRoute) ---------- */
+
+.adm-verify {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background: var(--light);
+}
+
+.adm-verify p {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.adm-spinner {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid var(--primary-soft);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+
+  animation: adm-spin 0.8s linear infinite;
+}
+
+@keyframes adm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .adm-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: none;
+  }
+
+  .adm-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 60px rgba(11, 17, 32, 0.25);
+  }
+
+  .adm-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: rgba(11, 17, 32, 0.45);
+  }
+
+  .adm-main {
+    margin-left: 0;
+  }
+
+  .adm-menu-btn {
+    display: inline-flex;
+  }
+
+  .adm-topbar {
+    padding: 0 18px;
+  }
+
+  .adm-content {
+    padding: 30px 18px 55px;
+  }
+}
+
+@media (max-width: 560px) {
+  .adm-live {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .adm-top-link {
+    display: none;
+  }
+
+  .adm-page-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adm-sidebar {
+    transition: none;
+  }
+
+  .adm-spinner {
+    animation-duration: 2s;
+  }
+}

@@ -1,31 +1,47 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { defaultSiteContent } from "../lib/siteContent";
+import "./Contact.css";
 
 function Contact() {
+  const [content, setContent] = useState(defaultSiteContent.contact);
+
+  useEffect(() => {
+    const fetchContactContent = async () => {
+      const { data, error } = await supabase
+        .from("site_content")
+        .select("content")
+        .eq("content_key", "contact")
+        .eq("is_published", true)
+        .maybeSingle();
+
+      if (!error && data?.content) {
+        setContent((previous) => ({
+          ...previous,
+          ...data.content,
+        }));
+      }
+    };
+
+    fetchContactContent();
+  }, []);
+
   return (
-    <main className="contact-page">
-
-      {/* =========================================
-          CONTACT HERO
-      ========================================= */}
-      <section className="contact-hero">
-        <div className="contact-hero-content">
-
-          <span className="contact-label">
-            CONTACT DELTA GUN
+    <div className="ct-page">
+      {/* HERO */}
+      <section className="ct-hero">
+        <div className="ct-hero-inner">
+          <span className="ct-pill">
+            <span className="ct-pill-dot"></span>
+            {content.heroLabel}
           </span>
 
-          <h1>
-            Let's Start a Conversation.
-          </h1>
+          <h1>{content.heroTitle}</h1>
 
-          <p>
-            Have a question about our collections or need
-            additional information? Our team is here to help
-            you with your general inquiries.
-          </p>
+          <p>{content.heroDescription}</p>
 
-          <div className="contact-hero-points">
-
+          <div className="ct-points">
             <span>
               <i className="bi bi-patch-check-fill"></i>
               Professional Support
@@ -40,307 +56,159 @@ function Contact() {
               <i className="bi bi-envelope-check-fill"></i>
               Quick Response
             </span>
-
           </div>
-
         </div>
       </section>
 
-
-      {/* =========================================
-          CONTACT MAIN
-      ========================================= */}
-      <section className="contact-section">
-
-        <div className="contact-container">
-
-
-          {/* =====================================
-              CONTACT INFORMATION
-          ===================================== */}
-          <div className="contact-info-header">
-
-            <span>GET IN TOUCH</span>
-
-            <h2>
-              We're Here to Help
-            </h2>
-
-            <p>
-              Choose your preferred way to contact the
-              Delta Gun team. We are happy to assist with
-              general information and inquiries.
-            </p>
-
+      {/* INFO CARDS */}
+      <section className="ct-section">
+        <div className="ct-container">
+          <div className="ct-head">
+            <span className="ct-eyebrow">{content.infoLabel}</span>
+            <h2>{content.infoTitle}</h2>
+            <p>{content.infoDescription}</p>
           </div>
 
-
-          <div className="contact-info-grid">
-
-            {/* Phone */}
-            <div className="contact-info-card">
-
-              <div className="contact-info-icon">
-                <i className="bi bi-telephone-fill"></i>
-              </div>
-
-              <div>
-                <span className="contact-card-label">
-                  CALL US
+          <div className="ct-info-grid">
+            <div className="ct-info-card">
+              <div className="ct-info-top">
+                <span className="ct-info-icon">
+                  <i className="bi bi-telephone-fill"></i>
                 </span>
-
-                <h3>Phone</h3>
-
-                <a href="tel:+923131555111">
-                  +92 313 1555 111
-                </a>
-
-                <p>
-                  Available for general inquiries and
-                  information.
-                </p>
+                <span className="ct-card-label">CALL US</span>
               </div>
 
+              <h3>Phone</h3>
+
+              <a href={`tel:${(content.phone || "").replace(/\s/g, "")}`}>
+                {content.phone}
+              </a>
+
+              <p>Available for general inquiries and information.</p>
             </div>
 
-
-            {/* Email */}
-            <div className="contact-info-card">
-
-              <div className="contact-info-icon">
-                <i className="bi bi-envelope-fill"></i>
-              </div>
-
-              <div>
-                <span className="contact-card-label">
-                  EMAIL US
+            <div className="ct-info-card">
+              <div className="ct-info-top">
+                <span className="ct-info-icon">
+                  <i className="bi bi-envelope-fill"></i>
                 </span>
-
-                <h3>Email</h3>
-
-                <a href="mailto:deltagun@gmail.com">
-                  deltagun@gmail.com
-                </a>
-
-                <p>
-                  Send us your questions and we'll get
-                  back to you.
-                </p>
+                <span className="ct-card-label">EMAIL US</span>
               </div>
 
+              <h3>Email</h3>
+
+              <a href={`mailto:${content.email}`}>{content.email}</a>
+
+              <p>Send us your questions and we'll get back to you.</p>
             </div>
 
-
-            {/* Address */}
-            <div className="contact-info-card">
-
-              <div className="contact-info-icon">
-                <i className="bi bi-geo-alt-fill"></i>
-              </div>
-
-              <div>
-                <span className="contact-card-label">
-                  VISIT US
+            <div className="ct-info-card">
+              <div className="ct-info-top">
+                <span className="ct-info-icon">
+                  <i className="bi bi-geo-alt-fill"></i>
                 </span>
-
-                <h3>Shop Address</h3>
-
-                <p>
-                  Shop No. 26 Salma Plaza Ground Floor,
-                  Mir Karam Ali Talpur Road Near Lucky Star.
-                </p>
-
+                <span className="ct-card-label">VISIT US</span>
               </div>
 
-            </div>
+              <h3>Shop Address</h3>
 
+              <p className="ct-address">{content.address}</p>
+            </div>
           </div>
 
+          {/* FORM AREA */}
+          <div className="ct-form-grid">
+            <div className="ct-form-intro">
+              <span className="ct-eyebrow">{content.formLabel}</span>
+              <h2>{content.formTitle}</h2>
+              <p>{content.formDescription}</p>
 
-          {/* =====================================
-              CONTACT FORM AREA
-          ===================================== */}
-          <div className="contact-content-grid">
-
-
-            {/* Left Information */}
-            <div className="contact-form-intro">
-
-              <span className="contact-form-label">
-                SEND A MESSAGE
-              </span>
-
-              <h2>
-                Have a Question?
-              </h2>
-
-              <p>
-                Fill out the form and send your inquiry
-                directly to our team. Please provide
-                accurate information so we can respond
-                appropriately.
-              </p>
-
-
-              <div className="contact-benefits">
-
+              <div className="ct-benefits">
                 <div>
                   <i className="bi bi-check-circle-fill"></i>
-
-                  <span>
-                    Clear and professional communication
-                  </span>
+                  <span>Clear and professional communication</span>
                 </div>
 
                 <div>
                   <i className="bi bi-check-circle-fill"></i>
-
-                  <span>
-                    General product information
-                  </span>
+                  <span>General product information</span>
                 </div>
 
                 <div>
                   <i className="bi bi-check-circle-fill"></i>
-
-                  <span>
-                    Easy contact process
-                  </span>
+                  <span>Easy contact process</span>
                 </div>
-
               </div>
 
-
-              <div className="contact-mini-card">
-
-                <div className="contact-mini-icon">
+              <div className="ct-mini-card">
+                <span className="ct-mini-icon">
                   <i className="bi bi-headset"></i>
-                </div>
+                </span>
 
                 <div>
-                  <strong>
-                    Need direct assistance?
-                  </strong>
-
-                  <span>
-                    Call us at +92 313 1555 111
-                  </span>
+                  <strong>Need direct assistance?</strong>
+                  <span>Call us at {content.phone}</span>
                 </div>
-
               </div>
-
             </div>
 
-
-            {/* Contact Form */}
-            <div className="contact-form-wrapper">
-
-              <form
-                className="contact-form"
-                onSubmit={(e) => e.preventDefault()}
-              >
-
-                <div className="form-row">
-
-                  <div className="form-group">
-
-                    <label>
-                      Your Name
-                    </label>
-
+            <div className="ct-form-box">
+              <form className="ct-form" onSubmit={(e) => e.preventDefault()}>
+                <div className="ct-row">
+                  <div className="ct-field">
+                    <label htmlFor="ct-name">Your Name</label>
                     <input
+                      id="ct-name"
                       type="text"
                       placeholder="Enter your name"
                     />
-
                   </div>
 
-
-                  <div className="form-group">
-
-                    <label>
-                      Your Email
-                    </label>
-
+                  <div className="ct-field">
+                    <label htmlFor="ct-email">Your Email</label>
                     <input
+                      id="ct-email"
                       type="email"
                       placeholder="Enter your email"
                     />
-
                   </div>
-
                 </div>
 
-
-                <div className="form-group">
-
-                  <label>
-                    Subject
-                  </label>
-
+                <div className="ct-field">
+                  <label htmlFor="ct-subject">Subject</label>
                   <input
+                    id="ct-subject"
                     type="text"
                     placeholder="What would you like to ask?"
                   />
-
                 </div>
 
-
-                <div className="form-group">
-
-                  <label>
-                    Your Message
-                  </label>
-
+                <div className="ct-field">
+                  <label htmlFor="ct-message">Your Message</label>
                   <textarea
+                    id="ct-message"
                     placeholder="Write your message here..."
                     rows="7"
                   ></textarea>
-
                 </div>
 
-
-                <button
-                  type="submit"
-                  className="btn-primary contact-submit-btn"
-                >
+                <button type="submit" className="ct-submit">
                   <span>Send Message</span>
-
                   <i className="bi bi-send-fill"></i>
-
                 </button>
-
               </form>
-
             </div>
-
           </div>
 
+          {/* SOCIAL */}
+          <div className="ct-social">
+            <span className="ct-eyebrow">{content.socialLabel}</span>
+            <h3>{content.socialTitle}</h3>
+            <p>{content.socialDescription}</p>
 
-          {/* =====================================
-              SOCIAL MEDIA
-          ===================================== */}
-          <div className="social-section">
-
-            <span>
-              FOLLOW DELTA GUN
-            </span>
-
-            <h3>
-              Connect With Us
-            </h3>
-
-            <p>
-              Stay connected with Delta Gun through our
-              social channels.
-            </p>
-
-
-            <div className="social-links">
-
-              {/* Facebook */}
+            <div className="ct-social-links">
               <a
-                href="https://www.facebook.com/"
+                href={content.facebook}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
@@ -348,10 +216,8 @@ function Contact() {
                 <i className="bi bi-facebook"></i>
               </a>
 
-
-              {/* Instagram */}
               <a
-                href="https://www.instagram.com/deltagun.pk?igsh=NjQxeDkzMTBiOWYz"
+                href={content.instagram}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -359,10 +225,8 @@ function Contact() {
                 <i className="bi bi-instagram"></i>
               </a>
 
-
-              {/* YouTube */}
               <a
-                href="https://youtube.com/@deltagun-07?si=I0RiqKZ7CpPPG7wT"
+                href={content.youtube}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="YouTube"
@@ -370,48 +234,27 @@ function Contact() {
                 <i className="bi bi-youtube"></i>
               </a>
 
-
-              {/* WhatsApp */}
               <a
-                href="https://whatsapp.com/channel/0029Vb7ipGg6LwHdZVzvTj3i"
+                href={content.whatsapp}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
               >
                 <i className="bi bi-whatsapp"></i>
               </a>
-
             </div>
-
           </div>
 
-
-          {/* =====================================
-              BACK HOME
-          ===================================== */}
-          <div className="contact-home-link">
-
-            <Link
-              to="/"
-              className="back-home-btn"
-            >
+          {/* BACK HOME */}
+          <div className="ct-home">
+            <Link to="/" className="ct-home-btn">
               <i className="bi bi-arrow-left"></i>
-
-              <span>
-                Back to Home
-              </span>
-
-              <i className="bi bi-house-door-fill back-home-icon"></i>
-
+              <span>Back to Home</span>
             </Link>
-
           </div>
-
         </div>
-
       </section>
-
-    </main>
+    </div>
   );
 }
 

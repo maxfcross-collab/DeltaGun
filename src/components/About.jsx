@@ -1,352 +1,402 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { defaultSiteContent } from "../lib/siteContent";
+import "./About.css";
+
+const defaultAboutCards = {
+  valuesCards: [
+    {
+      title: "Quality Focused",
+      description:
+        "Carefully presented selections with attention to quality, design and detail.",
+      icon: "bi-patch-check",
+    },
+    {
+      title: "Precision Driven",
+      description:
+        "Clear and professional information designed to help customers explore available options.",
+      icon: "bi-bullseye",
+    },
+    {
+      title: "Easy Contact",
+      description:
+        "A simple and convenient way to connect with our team for more information.",
+      icon: "bi-chat-dots",
+    },
+  ],
+
+  whyParagraph2:
+    "From featured collections to premium selections, our presentation is built to make browsing simple, clear and professional.",
+
+  checklist: [
+    "Clear information presentation",
+    "Professional collection categories",
+    "Simple customer communication",
+    "Quality-focused presentation",
+  ],
+
+  whyCardTitle: "Quality. Precision. Performance.",
+  whyCardDescription:
+    "Professional presentation of selected collections for enthusiasts.",
+
+  whyMeta: [
+    { number: "01", label: "Quality" },
+    { number: "02", label: "Precision" },
+    { number: "03", label: "Service" },
+  ],
+
+  highlightsCards: [
+    {
+      number: "01",
+      title: "Curated Collections",
+      description:
+        "Explore carefully presented collections organized for a simple browsing experience.",
+      icon: "bi-grid-3x3-gap",
+    },
+    {
+      number: "02",
+      title: "Clear Information",
+      description:
+        "Find straightforward information about our collections and available options.",
+      icon: "bi-info-circle",
+    },
+    {
+      number: "03",
+      title: "Customer Support",
+      description:
+        "Get in touch with our team whenever you need additional information or assistance.",
+      icon: "bi-headset",
+    },
+    {
+      number: "04",
+      title: "Professional Presentation",
+      description:
+        "A clean and modern presentation built around quality and attention to detail.",
+      icon: "bi-stars",
+    },
+  ],
+};
+
+/* First sentence = dark, rest = royal blue */
+const splitTitle = (title = "") => {
+  const sentences =
+    title.trim().match(/[^.!?]+[.!?]*/g)?.map((s) => s.trim()) || [];
+
+  if (sentences.length > 1) {
+    return { dark: sentences[0], blue: sentences.slice(1).join(" ") };
+  }
+
+  const words = title.trim().split(/\s+/).filter(Boolean);
+  if (words.length < 2) return { dark: title, blue: "" };
+
+  const mid = Math.ceil(words.length / 2);
+  return {
+    dark: words.slice(0, mid).join(" "),
+    blue: words.slice(mid).join(" "),
+  };
+};
+
+/* Icon names from admin may come with or without "bi-" prefix */
+const iconClass = (icon, fallback = "bi-star") => {
+  const name = icon || fallback;
+  return `bi ${name.startsWith("bi-") ? name : `bi-${name}`}`;
+};
 
 function About() {
+  const [content, setContent] = useState({
+    ...defaultSiteContent.about,
+    ...defaultAboutCards,
+  });
+
+  useEffect(() => {
+    const fetchAboutContent = async () => {
+      const { data, error } = await supabase
+        .from("site_content")
+        .select("content")
+        .eq("content_key", "about")
+        .eq("is_published", true)
+        .maybeSingle();
+
+      if (!error && data?.content) {
+        setContent((previous) => ({
+          ...previous,
+          ...data.content,
+        }));
+      }
+    };
+
+    fetchAboutContent();
+  }, []);
+
+  /* Scroll reveal */
+  useEffect(() => {
+    const items = document.querySelectorAll(".ab-reveal");
+
+    if (!("IntersectionObserver" in window)) {
+      items.forEach((el) => el.classList.add("in"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    items.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [content]);
+
+  const { dark, blue } = splitTitle(content.heroTitle);
+
+  const values = content.valuesCards || defaultAboutCards.valuesCards;
+  const checklist = content.checklist || defaultAboutCards.checklist;
+  const meta = content.whyMeta || defaultAboutCards.whyMeta;
+  const highlights =
+    content.highlightsCards || defaultAboutCards.highlightsCards;
+
+  const ribbon = [
+    "QUALITY",
+    "PRECISION",
+    "PERFORMANCE",
+    "PROFESSIONAL",
+    "DELTA GUN",
+  ];
+
   return (
-    <main className="about-page">
-
-      {/* =========================
-          ABOUT HERO
-      ========================== */}
-      <section className="about-hero">
-        <div className="about-hero-content">
-
-          <span className="about-label">
-            ABOUT DELTA GUN
-          </span>
-
-          <h1>
-            Quality. Precision. Confidence.
-          </h1>
-
-          <p className="about-intro">
-            Delta Gun is dedicated to presenting a carefully selected
-            range of firearms and tactical equipment for enthusiasts
-            who appreciate quality, precision and professional
-            presentation.
-          </p>
-
-          <p className="about-intro secondary">
-            Our goal is to provide customers with clear information
-            and a simple way to connect with our team for product
-            details and general inquiries.
-          </p>
-
-          <div className="about-hero-actions">
-            <Link to="/products" className="btn-primary">
-              <i className="bi bi-grid"></i>
-              Explore Collection
-              <i className="bi bi-arrow-right"></i>
-            </Link>
-
-            <Link to="/contact" className="about-outline-btn">
-              <i className="bi bi-chat-dots"></i>
-              Contact Us
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* =========================
-          BRAND VALUES
-      ========================== */}
-      <section className="about-values-section">
-
-        <div className="about-section-heading">
-          <span>WHAT WE STAND FOR</span>
-
-          <h2>
-            Built Around Quality &amp; Precision
-          </h2>
-
-          <p>
-            Every part of the Delta Gun experience is designed
-            around clear information, professional presentation
-            and customer convenience.
-          </p>
-        </div>
-
-
-        <div className="about-values">
-
-          {/* Quality */}
-          <div className="about-value">
-            <div className="about-value-icon">
-              <i className="bi bi-patch-check"></i>
-            </div>
-
-            <div>
-              <h3>Quality Focused</h3>
-
-              <p>
-                Carefully presented selections with attention
-                to quality, design and detail.
-              </p>
-            </div>
-          </div>
-
-
-          {/* Precision */}
-          <div className="about-value">
-            <div className="about-value-icon">
-              <i className="bi bi-bullseye"></i>
-            </div>
-
-            <div>
-              <h3>Precision Driven</h3>
-
-              <p>
-                Clear and professional information designed
-                to help customers explore available options.
-              </p>
-            </div>
-          </div>
-
-
-          {/* Contact */}
-          <div className="about-value">
-            <div className="about-value-icon">
-              <i className="bi bi-chat-dots"></i>
-            </div>
-
-            <div>
-              <h3>Easy Contact</h3>
-
-              <p>
-                A simple and convenient way to connect with
-                our team for more information.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          WHY DELTA GUN
-      ========================== */}
-      <section className="about-why-section">
-
-        <div className="about-why-content">
-
-          <div className="about-why-text">
-
-            <span className="about-small-label">
-              WHY DELTA GUN
+    <div className="ab-page">
+      {/* ================= HERO ================= */}
+      <section className="ab-hero">
+        <div className="ab-container ab-hero-grid">
+          <div className="ab-hero-copy">
+            <span className="ab-pill">
+              <span className="ab-pill-dot"></span>
+              {content.heroLabel}
             </span>
 
-            <h2>
-              A Professional Way to Explore Our Collection
-            </h2>
+            <h1>
+              <span className="ab-title-dark">{dark}</span>
+              {blue && <span className="ab-title-blue">{blue}</span>}
+            </h1>
 
-            <p>
-              Delta Gun focuses on creating a straightforward
-              experience where visitors can explore our featured
-              collections and easily find additional information.
-            </p>
+            <p className="ab-lead">{content.heroDescription}</p>
+            <p className="ab-lead ab-lead-2">{content.heroDescription2}</p>
 
-            <p>
-              From tactical collections to premium gear and
-              featured selections, our presentation is built to
-              make browsing simple, clear and professional.
-            </p>
+            <div className="ab-actions">
+              <Link to="/products" className="ab-btn ab-btn-primary">
+                Explore Collection
+                <i className="bi bi-arrow-right"></i>
+              </Link>
 
-
-            <div className="about-check-list">
-
-              <div>
-                <i className="bi bi-check-circle-fill"></i>
-                <span>Clear product presentation</span>
-              </div>
-
-              <div>
-                <i className="bi bi-check-circle-fill"></i>
-                <span>Professional collection categories</span>
-              </div>
-
-              <div>
-                <i className="bi bi-check-circle-fill"></i>
-                <span>Simple customer communication</span>
-              </div>
-
-              <div>
-                <i className="bi bi-check-circle-fill"></i>
-                <span>Quality-focused presentation</span>
-              </div>
-
+              <Link to="/contact" className="ab-btn ab-btn-outline">
+                <i className="bi bi-chat-dots"></i>
+                Contact Us
+              </Link>
             </div>
-
           </div>
 
+          {/* Visual panel */}
+          <div className="ab-visual">
+            <div className="ab-visual-frame">
+              <div className="ab-visual-top">
+                <span>
+                  <i className="ab-dot"></i> ABOUT DELTA GUN
+                </span>
+                <span>SYS.01</span>
+              </div>
 
-          {/* Visual Information Card */}
-          <div className="about-why-card">
+              <div className="ab-visual-canvas">
+                <div className="ab-ring ab-ring-1"></div>
+                <div className="ab-ring ab-ring-2"></div>
+                <div className="ab-ring ab-ring-3"></div>
 
-            <div className="about-why-card-icon">
+                <div className="ab-visual-center">
+                  <i className="bi bi-bullseye"></i>
+                  <strong>DELTA</strong>
+                  <small>PRECISION SHOWROOM</small>
+                </div>
+
+                <div className="ab-chip ab-chip-top">
+                  <i className="bi bi-patch-check-fill"></i>
+                  <span>
+                    QUALITY
+                    <br />
+                    FOCUSED
+                  </span>
+                </div>
+
+                <div className="ab-chip ab-chip-bottom">
+                  <i className="bi bi-geo-alt-fill"></i>
+                  <span>
+                    Karachi
+                    <br />
+                    SHOWROOM
+                  </span>
+                </div>
+              </div>
+
+              <div className="ab-visual-bottom">
+                <span>QUALITY · PRECISION · PERFORMANCE</span>
+                <i className="bi bi-arrow-down-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= RIBBON ================= */}
+      <div className="ab-ribbon" aria-hidden="true">
+        <div className="ab-ribbon-track">
+          {[...ribbon, ...ribbon, ...ribbon, ...ribbon].map((word, i) => (
+            <span key={i}>
+              {word}
+              <i className="bi bi-plus-lg"></i>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ================= VALUES ================= */}
+      <section className="ab-section">
+        <div className="ab-container">
+          <div className="ab-head ab-reveal">
+            <span className="ab-eyebrow">{content.valuesLabel}</span>
+            <h2>{content.valuesTitle}</h2>
+            <p>{content.valuesDescription}</p>
+          </div>
+
+          <div className="ab-values">
+            {values.map((item, index) => (
+              <div
+                className={`ab-value ab-reveal ${
+                  index === 0 ? "is-featured" : ""
+                }`}
+                style={{ transitionDelay: `${index * 90}ms` }}
+                key={index}
+              >
+                <span className="ab-value-num">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <div className="ab-value-icon">
+                  <i className={iconClass(item.icon)}></i>
+                </div>
+
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= WHY (DARK) ================= */}
+      <section className="ab-why-section">
+        <div className="ab-container ab-why">
+          <div className="ab-why-text ab-reveal">
+            <span className="ab-eyebrow">{content.whyLabel}</span>
+            <h2>{content.whyTitle}</h2>
+            <p>{content.whyDescription}</p>
+            <p>{content.whyParagraph2}</p>
+
+            <div className="ab-checks">
+              {checklist.map((item, index) => (
+                <div key={index}>
+                  <i className="bi bi-check-lg"></i>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="ab-why-card ab-reveal">
+            <div className="ab-why-icon">
               <i className="bi bi-award"></i>
             </div>
 
-            <span>DELTA GUN</span>
+            <span className="ab-why-tag">DELTA GUN</span>
 
-            <h3>
-              Quality. Precision. Performance.
-            </h3>
+            <h3>{content.whyCardTitle}</h3>
+            <p>{content.whyCardDescription}</p>
 
-            <p>
-              Professional presentation of selected firearms
-              and tactical equipment for enthusiasts.
-            </p>
+            <div className="ab-divider"></div>
 
-            <div className="about-card-divider"></div>
-
-            <div className="about-card-meta">
-              <div>
-                <strong>01</strong>
-                <span>Quality</span>
-              </div>
-
-              <div>
-                <strong>02</strong>
-                <span>Precision</span>
-              </div>
-
-              <div>
-                <strong>03</strong>
-                <span>Service</span>
-              </div>
+            <div className="ab-meta">
+              {meta.map((item, index) => (
+                <div key={index}>
+                  <strong>{item.number}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
             </div>
-
           </div>
-
         </div>
-
       </section>
 
+      {/* ================= HIGHLIGHTS / STEPS ================= */}
+      <section className="ab-section">
+        <div className="ab-container">
+          <div className="ab-head ab-reveal">
+            <span className="ab-eyebrow">{content.highlightsLabel}</span>
+            <h2>{content.highlightsTitle}</h2>
+            <p>{content.highlightsDescription}</p>
+          </div>
 
-      {/* =========================
-          HIGHLIGHTS
-      ========================== */}
-      <section className="about-highlights">
+          <div className="ab-steps">
+            {highlights.map((item, index) => (
+              <div
+                className="ab-step ab-reveal"
+                style={{ transitionDelay: `${index * 90}ms` }}
+                key={index}
+              >
+                <div className="ab-step-node">
+                  <span>
+                    {item.number || String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
-        <div className="about-section-heading">
-          <span>DELTA GUN EXPERIENCE</span>
-
-          <h2>
-            Designed For A Better Experience
-          </h2>
-
-          <p>
-            We keep the experience simple, professional and
-            focused on what matters most.
-          </p>
+                <div className="ab-step-card">
+                  <i className={iconClass(item.icon)}></i>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-
-
-        <div className="about-highlight-grid">
-
-          <div className="about-highlight-card">
-            <div className="highlight-number">01</div>
-
-            <i className="bi bi-grid-3x3-gap"></i>
-
-            <h3>Curated Collections</h3>
-
-            <p>
-              Explore carefully presented collections organized
-              for a simple browsing experience.
-            </p>
-          </div>
-
-
-          <div className="about-highlight-card">
-            <div className="highlight-number">02</div>
-
-            <i className="bi bi-info-circle"></i>
-
-            <h3>Clear Information</h3>
-
-            <p>
-              Find straightforward information about our
-              collections and available options.
-            </p>
-          </div>
-
-
-          <div className="about-highlight-card">
-            <div className="highlight-number">03</div>
-
-            <i className="bi bi-headset"></i>
-
-            <h3>Customer Support</h3>
-
-            <p>
-              Get in touch with our team whenever you need
-              additional information or assistance.
-            </p>
-          </div>
-
-
-          <div className="about-highlight-card">
-            <div className="highlight-number">04</div>
-
-            <i className="bi bi-stars"></i>
-
-            <h3>Professional Presentation</h3>
-
-            <p>
-              A clean and modern presentation built around
-              quality, precision and attention to detail.
-            </p>
-          </div>
-
-        </div>
-
       </section>
 
+      {/* ================= CTA ================= */}
+      <section className="ab-cta-section">
+        <div className="ab-container">
+          <div className="ab-cta ab-reveal">
+            <span className="ab-cta-label">{content.ctaLabel}</span>
+            <h2>{content.ctaTitle}</h2>
+            <p>{content.ctaDescription}</p>
 
-      {/* =========================
-          CTA
-      ========================== */}
-      <section className="about-cta">
+            <div className="ab-cta-buttons">
+              <Link to="/products" className="ab-cta-primary">
+                Shop All
+                <i className="bi bi-arrow-right"></i>
+              </Link>
 
-        <div className="about-cta-content">
-
-          <span>
-            READY TO EXPLORE?
-          </span>
-
-          <h2>
-            Discover The Delta Gun Collection
-          </h2>
-
-          <p>
-            Explore our featured collections or contact our
-            team for more information.
-          </p>
-
-          <div className="about-cta-buttons">
-
-            <Link to="/products" className="btn-primary">
-              <i className="bi bi-grid"></i>
-              Shop All
-              <i className="bi bi-arrow-right"></i>
-            </Link>
-
-            <Link to="/contact" className="about-cta-outline">
-              <i className="bi bi-chat-text"></i>
-              Get In Touch
-            </Link>
-
+              <Link to="/contact" className="ab-cta-secondary">
+                <i className="bi bi-chat-text"></i>
+                Get In Touch
+              </Link>
+            </div>
           </div>
-
         </div>
-
       </section>
-
-    </main>
+    </div>
   );
 }
 
